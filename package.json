@@ -1,7 +1,7 @@
 {
   "name": "express-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "express server with Typescript",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
     "build": "tsc --project ./"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rohit Ambre",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1"
