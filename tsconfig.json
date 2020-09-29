@@ -4,9 +4,10 @@
          "es5",
          "es6"
       ],
-      "target": "es5",
+      "target": "es6",
       "module": "commonjs",
       "moduleResolution": "node",
+      "rootDir": "./",
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
