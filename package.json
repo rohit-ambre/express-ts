@@ -8,7 +8,8 @@
       "dev": "nodemon server.ts",
       "build": "tsc --project ./",
       "start": "ts-node src/index.ts",
-      "lint": "eslint . && echo 'Lint complete.'"
+      "lint": "eslint . && echo 'Lint complete.'",
+      "lint:fix": "eslint --fix . "
    },
    "keywords": [],
    "author": "Rohit Ambre",
