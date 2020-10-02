@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+
+# Public files
+public/
+
+# ignored JSON files as they are not linted by ESlint
+package.json
+package-lock.json
+*.json
