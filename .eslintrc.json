@@ -4,7 +4,8 @@
     "node": true
   },
   "extends": [
-    "airbnb-typescript/base"
+    "airbnb-typescript/base",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -13,8 +14,11 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "rules": {
+    "@typescript-eslint/comma-dangle": ["off"],
+    "prettier/prettier": ["warn"]
   }
 }
