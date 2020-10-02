@@ -1,9 +1,10 @@
 import { Request, Response, Application } from 'express';
 import express = require('express');
+
 require('dotenv').config();
 
 const app: Application = express();
-const PORT: Number = parseInt(process.env.PORT);
+const PORT: Number = parseInt(process.env.PORT, 10);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

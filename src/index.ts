@@ -1,10 +1,10 @@
-import "reflect-metadata";
-import { createConnection } from "typeorm";
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
 
 createConnection()
-  .then(async connection => {
-    console.log("Database connected");
+  .then(() => {
+    console.log('Database connected');
   })
-  .catch(error => {
-    console.log(error)
+  .catch((error) => {
+    console.log(error);
   });
