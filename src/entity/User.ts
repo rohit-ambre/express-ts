@@ -7,16 +7,16 @@ export class User {
   id: number;
 
   @Column()
-  email: string
+  email: string;
 
-  @Column()
+  @Column({nullable: true})
   firstName: string;
 
-  @Column()
+  @Column({nullable: true})
   lastName: string;
 
   @Column({type: 'text'})
-  password: string
+  password: string;
 
   @CreateDateColumn()
   createdAt: Date;
