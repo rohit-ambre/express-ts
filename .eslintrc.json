@@ -19,6 +19,7 @@
   ],
   "rules": {
     "@typescript-eslint/comma-dangle": ["off"],
-    "prettier/prettier": ["warn"]
+    "prettier/prettier": ["warn"],
+    "import/first": ["off"]
   }
 }
