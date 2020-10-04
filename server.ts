@@ -26,6 +26,13 @@ createConnection()
     throw new Error(`Unable to connect to the database:' ${error.message}`);
   });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('💥 Process terminated!');
+  });
 });
