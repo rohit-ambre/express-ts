@@ -20,6 +20,7 @@
   "rules": {
     "@typescript-eslint/comma-dangle": ["off"],
     "prettier/prettier": ["warn"],
-    "import/first": ["off"]
+    "import/first": ["off"],
+    "new-cap": "off"
   }
 }
