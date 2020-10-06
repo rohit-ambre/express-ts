@@ -3,8 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  BeforeInsert
 } from 'typeorm';
+import bcrypt = require('bcrypt');
 
 @Entity({ name: 'users' })
 export default class User {
@@ -28,4 +30,10 @@ export default class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @BeforeInsert()
+  private async hashPassord(): Promise<void> {
+    const salt: string = await bcrypt.genSalt(parseInt(process.env.SALT, 10));
+    this.password = await bcrypt.hash(this.password, salt);
+  }
 }
