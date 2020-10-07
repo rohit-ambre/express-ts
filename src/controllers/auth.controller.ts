@@ -27,7 +27,10 @@ export const signup = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const userRepo = getRepository(User);
-    const user: User = await userRepo.findOne({ email: req.body.email });
+    const user: User = await userRepo.findOne({
+      where: { email: req.body.email },
+      select: ['id', 'password', 'email']
+    });
     if (!user) {
       return res
         .status(200)

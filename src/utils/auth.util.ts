@@ -1,5 +1,6 @@
+import { Request, Response, NextFunction } from 'express';
 import { compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 
 /**
  * compare entered password with user's password
@@ -22,4 +23,32 @@ export const comparePassword = async (
 export const createAccessToken = async (payload: object) => {
   const expiry: string = '15m';
   return sign(payload, process.env.JWT_SECRET, { expiresIn: expiry });
+};
+
+/**
+ * middleware function to verify JWT token
+ * @param req request object
+ * @param res response object
+ * @param next next function
+ */
+export const verifyToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+  // eslint-disable-next-line consistent-return
+) => {
+  const token: string = req.headers.authorization;
+  if (!token) {
+    return res.status(400).json({ status: false, msg: 'Token is required' });
+  }
+  try {
+    const data = verify(token, process.env.JWT_SECRET);
+    req.token = data;
+    next();
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ status: false, msg: 'something went wrong', error });
+  }
 };
