@@ -22,7 +22,7 @@ export default class User {
   @Column({ nullable: true })
   lastName: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', select: false })
   password: string;
 
   @CreateDateColumn()
