@@ -1,5 +1,7 @@
 import { Request, Response, Application } from 'express';
 import express = require('express');
+import helmet = require('helmet');
+import morgan = require('morgan');
 import { createConnection } from 'typeorm';
 import apiRoutes from './src/routes';
 import 'reflect-metadata';
@@ -9,8 +11,10 @@ require('dotenv').config();
 const app: Application = express();
 const PORT: Number = parseInt(process.env.PORT, 10);
 
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan('combined'));
 
 createConnection()
   .then(() => {
