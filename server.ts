@@ -4,6 +4,7 @@ import helmet = require('helmet');
 import morgan = require('morgan');
 import { createConnection } from 'typeorm';
 import apiRoutes from './src/routes';
+import logger from './winston-config';
 import 'reflect-metadata';
 
 require('dotenv').config();
@@ -18,7 +19,7 @@ app.use(morgan('combined'));
 
 createConnection()
   .then(() => {
-    console.log('Database connected');
+    logger.info('Database connected');
     app.use('/api', apiRoutes);
 
     app.get('/', (req: Request, res: Response) => {
@@ -26,17 +27,17 @@ createConnection()
     });
   })
   .catch((error) => {
-    console.log(error);
+    logger.error(`Database connection ${error}`);
     throw new Error(`Unable to connect to the database:' ${error.message}`);
   });
 
 const server = app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  logger.info(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });
 
 process.on('SIGINT', () => {
-  console.log('SIGINT RECEIVED. Shutting down gracefully');
+  logger.warn('SIGINT RECEIVED. Shutting down gracefully');
   server.close(() => {
-    console.log('💥 Process terminated!');
+    logger.info('💥 Process terminated!');
   });
 });
