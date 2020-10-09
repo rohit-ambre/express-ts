@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import User from '../entity/User';
 import { comparePassword, createAccessToken } from '../utils/auth.util';
+import logger from '../../winston-config';
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -18,6 +19,7 @@ export const signup = async (req: Request, res: Response) => {
       .status(201)
       .json({ status: true, msg: 'User created successfully.', data: results });
   } catch (error) {
+    logger.error(`error in User creation: ${error}`);
     return res
       .status(500)
       .json({ status: false, msg: 'something went wrong', data: null, error });
@@ -48,7 +50,7 @@ export const login = async (req: Request, res: Response) => {
     }
     return res.status(401).json({ status: false, msg: 'Wrong Password' });
   } catch (error) {
-    console.log(error);
+    logger.error(`error in User login: ${error}`);
     return res.status(500).json({ status: false, msg: 'something went wrong' });
   }
 };

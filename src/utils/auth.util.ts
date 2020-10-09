@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { compare } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
+import logger from '../../winston-config';
 
 /**
  * compare entered password with user's password
@@ -46,7 +47,7 @@ export const verifyToken = (
     req.token = data;
     next();
   } catch (error) {
-    console.log(error);
+    logger.error(`error verifying token: ${error}`);
     return res
       .status(500)
       .json({ status: false, msg: 'something went wrong', error });
