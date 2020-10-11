@@ -1,8 +1,42 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import { body } from 'express-validator';
 import User from '../entity/User';
 import { comparePassword, createAccessToken } from '../utils/auth.util';
 import logger from '../../winston-config';
+
+export const validateRules = (method: string) => {
+  switch (method) {
+    case 'signup': {
+      return [
+        body('email')
+          .exists()
+          .withMessage('email does not exist')
+          .isEmail()
+          .withMessage('Invalid email'),
+        body('password')
+          .exists()
+          .withMessage('password does not exist')
+          .isLength({ min: 5 })
+          .withMessage('must be at least 5 chars long'),
+        body('firstName', 'enter first name').optional(),
+        body('lastName', 'enter last name').optional()
+      ];
+    }
+    case 'login': {
+      return [
+        body('email')
+          .exists()
+          .withMessage('email does not exist')
+          .isEmail()
+          .withMessage('Invalid email'),
+        body('password').exists().withMessage('password does not exist')
+      ];
+    }
+    default:
+      return false;
+  }
+};
 
 export const signup = async (req: Request, res: Response) => {
   try {
