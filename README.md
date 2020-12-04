@@ -1,5 +1,7 @@
 # Express-ts
 
+Express boilerplate/starter project in Typescript with TypeORM.
+
 Steps to run this project:
 
 1. Run `npm i` command to install dependencies.
